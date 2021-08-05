@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphicModel } from './components/graphic/graphic.model';
-import { TableFieldModel, TableModel } from './components/table/table.model';
+import { GraphicInterface } from './components/graphic/interfaces/graphic.interface';
+import { TableFieldInterface, TableInterface } from './components/table/interfaces/table.interface';
 import { CovidApiService } from './services/covid-api/covid-api.service';
 import { CovidDataModel, CovidModel } from './services/covid-api/covid-data.model';
 
@@ -11,9 +11,9 @@ import { CovidDataModel, CovidModel } from './services/covid-api/covid-data.mode
 })
 export class AppComponent implements OnInit {
   // Dados formatados para o formato esperado pelo gráfico
-  public dataGraphic!: GraphicModel;
+  public dataGraphic!: GraphicInterface;
   // Dados que irão popular a tabela
-  public dataTable!: TableModel<CovidDataModel>;
+  public dataTable!: TableInterface<CovidDataModel>;
 
   constructor(private covidApiService: CovidApiService) { }
 
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
    * @param data Dados a serem formatados
    * @returns Dados no formato esperado pelo gráfico
    */
-  private formatDataForGraphic(data: CovidDataModel[]): GraphicModel {
+  private formatDataForGraphic(data: CovidDataModel[]): GraphicInterface {
     const confirmeds: number[] = [];
     const deaths: number[] = [];
     const states: string[] = [];
@@ -56,9 +56,9 @@ export class AppComponent implements OnInit {
    * @param data Dados a serem formatados
    * @returns Dados no formato esperado pela tabela
    */
-  private formatDataForTable(data: CovidDataModel[]): TableModel<CovidDataModel> {
+  private formatDataForTable(data: CovidDataModel[]): TableInterface<CovidDataModel> {
     // Monta a configuração para a tabela
-    const fields: TableFieldModel[] = [
+    const fields: TableFieldInterface[] = [
       { columnName: 'UF',                keyOfValue: 'state' },
       { columnName: 'Casos confirmados', keyOfValue: 'confirmed', format: 'number' },
       { columnName: 'Mortes',            keyOfValue: 'deaths',    format: 'number' },

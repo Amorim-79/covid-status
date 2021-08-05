@@ -1,6 +1,6 @@
 import { formatDate, formatNumber } from '@angular/common';
 import { Component, Input, OnChanges } from '@angular/core';
-import { TableFieldModel, TableModel } from './table.model';
+import { TableFieldInterface, TableInterface } from './interfaces/table.interface';
 
 @Component({
   selector: 'app-table',
@@ -10,13 +10,13 @@ import { TableFieldModel, TableModel } from './table.model';
 export class TableComponent implements OnChanges {
 
   // Dados utilizados para popular a tabela
-  @Input() public props!: TableModel<any>;
+  @Input() public props!: TableInterface<any>;
 
   constructor() { }
 
   public ngOnChanges(): void {
     // Verifica se algum dos campos da tabela utilizará a formatação dos dados
-    this.props?.fields.forEach((field: TableFieldModel) => {
+    this.props?.fields.forEach((field: TableFieldInterface) => {
       if (field?.format) {
         this.transformData(field?.keyOfValue, field?.format);
       }

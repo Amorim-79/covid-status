@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartPluginsOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { GraphicModel } from './graphic.model';
+import { GraphicInterface } from './interfaces/graphic.interface';
 
 @Component({
   selector: 'app-graphic',
@@ -11,7 +11,7 @@ import { GraphicModel } from './graphic.model';
 export class GraphicComponent implements OnChanges {
 
   // Dados utilizados pelo gráfico
-  @Input() public data!: GraphicModel;
+  @Input() public data!: GraphicInterface;
 
   // Atributos utillizados pelo gráfico
   public barChartOptions: ChartOptions = { responsive: true };
