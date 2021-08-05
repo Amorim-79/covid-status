@@ -7,17 +7,17 @@ import { CovidDataModel, CovidModel } from './services/covid-api/covid-data.mode
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   // Dados formatados para o formato esperado pelo gráfico
-  dataGraphic!: GraphicModel;
+  public dataGraphic!: GraphicModel;
   // Dados que irão popular a tabela
-  dataTable!: TableModel<CovidDataModel>;
+  public dataTable!: TableModel<CovidDataModel>;
 
   constructor(private covidApiService: CovidApiService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     // Recupera todos os dados da api
     this.covidApiService.getCovidData().subscribe((response: CovidModel) => {
       // Realiza a formtação dos dados para os formatos esperados pelos componentes utilizados

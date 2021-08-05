@@ -1,25 +1,24 @@
 import { formatDate, formatNumber } from '@angular/common';
 import { Component, Input, OnChanges } from '@angular/core';
-import { CovidDataModel } from 'src/app/services/covid-api/covid-data.model';
-import { TableModel } from './table.model';
+import { TableFieldModel, TableModel } from './table.model';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnChanges {
 
   // Dados utilizados para popular a tabela
-  @Input() props!: TableModel<any>;
+  @Input() public props!: TableModel<any>;
 
   constructor() { }
 
-  ngOnChanges(): void {
+  public ngOnChanges(): void {
     // Verifica se algum dos campos da tabela utilizará a formatação dos dados
-    this.props?.fields.forEach((field) => {
+    this.props?.fields.forEach((field: TableFieldModel) => {
       if (field?.format) {
-        this.transformData(field.keyOfValue, field.format);
+        this.transformData(field?.keyOfValue, field?.format);
       }
     });
   }
@@ -29,8 +28,8 @@ export class TableComponent implements OnChanges {
    * @param field atributo que sofrerá a transformação
    * @param format formato do campo
    */
-  private transformData(field: string, format: string) {
-    this.props.data.forEach((item) => {
+  private transformData(field: string, format: string): void {
+    this.props?.data.forEach((item) => {
       if (format === 'date') {
         item[field] = formatDate(item[field], 'dd/MM/yyyy', 'pt-br');
       } else if (format === 'number') {
