@@ -1,0 +1,13 @@
+<div style="display: block;" *ngIf="data?.value?.length">
+  <canvas baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [chartType]="barChartType">
+  </canvas>
+</div>
+
+<!-- Indicador de carregamento dos dados -->
+<p *ngIf="!data?.value?.length" class="text-center">Loading...</p>
